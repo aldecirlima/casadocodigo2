@@ -32,4 +32,12 @@ public class LivroDao {
 		return manager.createQuery(jpql, Livro.class).setFirstResult(4).getResultList();
 	}
 
+	public Livro buscarPorId(Integer id) {
+		String jpql = "SELECT l FROM Livro l JOIN FETCH l.autores"
+				+ " WHERE l.id = :id";
+		return  manager.createQuery(jpql, Livro.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
+
 }
